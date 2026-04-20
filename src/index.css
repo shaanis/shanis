@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+html, body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+  color: white;
+}
+
+.outline-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  text-stroke: 1px rgba(255, 255, 255, 0.2);
+}
+
+::selection {
+  background: white;
+  color: black;
+}
