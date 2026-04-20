@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Code, Cpu, Palette, Globe } from "lucide-react";
-import profile from "../assets/projects/mockups/img2.jpeg";
+import profile from "../assets/projects/mockups/profile.jpeg";
 
 const AboutMe = () => {
   const skills = [

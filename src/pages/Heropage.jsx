@@ -215,7 +215,7 @@ const HeroPage = () => {
           ))}
 
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center opacity-40">
-            <span className="text-[8px] tracking-[1em] uppercase mb-4 text-white">Scroll</span>
+            {/* <span className="text-[8px] tracking-[1em] uppercase mb-4 text-white">Scroll</span> */}
             <div className="w-[1px] h-8 md:h-12 bg-white/20" />
           </div>
         </section>
