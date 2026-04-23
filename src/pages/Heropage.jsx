@@ -47,7 +47,7 @@ const HeroPage = () => {
       return new Promise((resolve) => {
         const frame = frameNumber.toString().padStart(3, "0");
         const img = new Image();
-        img.src = new URL(`../assets/images/ezgif-frame-${frame}.png`, import.meta.url).href;
+        img.src = new URL(`../assets/images/ezgif-frame-${frame}.webp`, import.meta.url).href;
         
         img.onload = () => {
           imagesRef.current[frameNumber - 1] = img;
