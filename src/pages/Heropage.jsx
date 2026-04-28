@@ -234,7 +234,7 @@ const HeroPage = () => {
               marginTop: window.innerWidth < 768 ? '160px' : '0px'
             }}
           >
-            <div className="text-center md:text-left md:mt-16">
+            <div className="text-center md:text-left md:mt-28">
               <p className="text-[10px] md:text-[18px] text-white/30 font-light mb-2 md:mb-8 tracking-[0.6em] md:tracking-[0.8em] uppercase">
                 FULL STACK DEVELOPER
               </p>
