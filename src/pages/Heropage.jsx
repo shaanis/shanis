@@ -12,22 +12,24 @@ import Header from "../components/Header";
 gsap.registerPlugin(ScrollTrigger);
 
 const TOTAL_FRAMES = 240;
-const FRAME_SKIP = 4; // Load every 4th frame for preview, load rest progressively
+const FRAME_SKIP = 4;
 
 const SCENES = [
   {
-    start: 0.2,
-    end: 0.45,
+    start: 0.20,
+    end: 0.35, 
+    position: "bottom-left", 
     title: "Full Stack Engineering",
-    description:
-      "Delivering end-to-end web solutions with modern frontend frameworks and scalable backend systems, ensuring performance, reliability, and exceptional user experience.",
+    subtitle: "01 / ARCHITECTURE",
+    description: "Delivering end-to-end web solutions with modern frontend frameworks and scalable backend systems.",
   },
   {
-    start: 0.6,
-    end: 0.85,
+    start: 0.45, // Starts shortly after scene 1
+    end: 0.60,   
+    position: "top-right", 
     title: "Performance & Scalability",
-    description:
-      "Architecting efficient APIs and optimized data flows with Node.js, databases, and caching strategies to handle real-world scale and high-demand applications.",
+    subtitle: "02 / OPTIMIZATION",
+    description: "Architecting efficient APIs and optimized data flows with Node.js and caching strategies.",
   },
 ];
 
@@ -48,98 +50,57 @@ const HeroPage = () => {
         const frame = frameNumber.toString().padStart(3, "0");
         const img = new Image();
         img.src = new URL(`../assets/images/ezgif-frame-${frame}.webp`, import.meta.url).href;
-        
         img.onload = () => {
           imagesRef.current[frameNumber - 1] = img;
           loadingRef.current.loaded++;
           setLoadProgress(Math.floor((loadingRef.current.loaded / TOTAL_FRAMES) * 100));
           resolve();
         };
-        
-        img.onerror = () => {
-          console.warn(`Failed to load frame ${frame}`);
-          resolve();
-        };
+        img.onerror = () => resolve();
       });
     };
 
     const preloadImages = async () => {
-      // Phase 1: Load key frames quickly (every FRAME_SKIP-th frame)
       const keyFrames = [];
-      for (let i = 1; i <= TOTAL_FRAMES; i += FRAME_SKIP) {
-        keyFrames.push(i);
-      }
-      
-      // Load key frames in parallel batches
-      const batchSize = 10;
+      for (let i = 1; i <= TOTAL_FRAMES; i += FRAME_SKIP) keyFrames.push(i);
+      const batchSize = 12;
       for (let i = 0; i < keyFrames.length; i += batchSize) {
-        const batch = keyFrames.slice(i, i + batchSize);
-        await Promise.all(batch.map(loadImage));
+        await Promise.all(keyFrames.slice(i, i + batchSize).map(loadImage));
       }
-
-      setIsReady(true); // Start animation with key frames
-
-      // Phase 2: Load remaining frames in background
+      setIsReady(true);
       const remainingFrames = [];
       for (let i = 1; i <= TOTAL_FRAMES; i++) {
-        if (!keyFrames.includes(i)) {
-          remainingFrames.push(i);
-        }
+        if (!keyFrames.includes(i)) remainingFrames.push(i);
       }
-
-      // Load remaining frames in small batches with delay
-      for (let i = 0; i < remainingFrames.length; i += 5) {
-        const batch = remainingFrames.slice(i, i + 5);
-        await Promise.all(batch.map(loadImage));
-        // Small delay to prevent blocking
-        await new Promise(resolve => setTimeout(resolve, 10));
+      for (let i = 0; i < remainingFrames.length; i += 8) {
+        await Promise.all(remainingFrames.slice(i, i + 8).map(loadImage));
+        await new Promise(r => setTimeout(r, 10));
       }
     };
-
     preloadImages();
   }, []);
 
   useEffect(() => {
     if (!isReady) return;
-
     const canvas = canvasRef.current;
-    if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
     const render = (frameIndex) => {
       const frame = Math.floor(frameIndex);
-      let img = imagesRef.current[frame];
-      
-      // Fallback to nearest available frame
-      if (!img) {
-        for (let i = frame; i >= 0; i--) {
-          if (imagesRef.current[i]) {
-            img = imagesRef.current[i];
-            break;
-          }
-        }
-      }
-
+      let img = imagesRef.current[frame] || imagesRef.current.find(i => i);
       if (img && img.complete) {
         const canvasRatio = canvas.width / canvas.height;
         const imgRatio = img.width / img.height;
-        
-        let drawWidth, drawHeight, x, y;
-        
+        let dW, dH, x, y;
         if (canvasRatio > imgRatio) {
-          drawWidth = canvas.width;
-          drawHeight = canvas.width / imgRatio;
-          x = 0;
-          y = (canvas.height - drawHeight) / 2;
+          dW = canvas.width; dH = canvas.width / imgRatio;
+          x = 0; y = (canvas.height - dH) / 2;
         } else {
-          drawWidth = canvas.height * imgRatio;
-          drawHeight = canvas.height;
-          x = (canvas.width - drawWidth) / 2;
-          y = 0;
+          dW = canvas.height * imgRatio; dH = canvas.height;
+          x = (canvas.width - dW) / 2; y = 0;
         }
-        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, x, y, drawWidth, drawHeight);
+        ctx.drawImage(img, x, y, dW, dH);
       }
     };
 
@@ -156,10 +117,9 @@ const HeroPage = () => {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=300%",
-        scrub: 0.3,
+        end: "+=400%",
+        scrub: 0.8,
         pin: true,
-        anticipatePin: 1,
         onUpdate: (self) => {
           scrollData.current.frame = (TOTAL_FRAMES - 1) * self.progress;
           render(scrollData.current.frame);
@@ -174,97 +134,50 @@ const HeroPage = () => {
     };
   }, [isReady]);
 
-  useEffect(() => {
-    const sections = ["home", "projects", "about", "testimonials", "faq", "contact"];
-    const observers = sections.map((id) => {
-      const el = document.getElementById(id);
-      if (el) {
-        const obs = new IntersectionObserver(
-          ([entry]) => entry.isIntersecting && setActiveSection(id),
-          { threshold: 0.3 }
-        );
-        obs.observe(el);
-        return obs;
-      }
-      return null;
-    }).filter(Boolean);
-
-    return () => observers.forEach((obs) => obs.disconnect());
-  }, []);
-
   const handleNavClick = (id) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setOpenMenu(false);
-    }
+    if (el) { el.scrollIntoView({ behavior: "smooth" }); setOpenMenu(false); }
   };
 
   return (
-    <div className="relative bg-black overflow-x-hidden">
+    <div className="relative bg-[#050505] overflow-x-hidden">
       {loadProgress < 100 && (
-        <div className="fixed inset-0 z-[300] bg-black flex flex-col items-center justify-center">
-          <div className="w-64 h-[2px] bg-white/10 rounded-full overflow-hidden mb-6">
-            <div 
-              className="h-full bg-white transition-all duration-300"
-              style={{ width: `${loadProgress}%` }}
-            />
+        <div className="fixed inset-0 z-[500] bg-black flex flex-col items-center justify-center">
+          <div className="w-48 h-[1px] bg-white/10 overflow-hidden mb-4">
+            <div className="h-full bg-white transition-all duration-500 ease-out" style={{ width: `${loadProgress}%` }} />
           </div>
-          <span className="text-[10px] text-white/40 tracking-[0.6em] uppercase">
-            Loading {loadProgress}%
-          </span>
+          <span className="text-[9px] text-white/40 tracking-[0.8em] font-light">SYSTEM INITIALIZING {loadProgress}%</span>
         </div>
       )}
 
-      <Header 
-        activeSection={activeSection} 
-        onNavClick={handleNavClick} 
-        openMenu={openMenu} 
-        setOpenMenu={setOpenMenu} 
-      />
+      <Header activeSection={activeSection} onNavClick={handleNavClick} openMenu={openMenu} setOpenMenu={setOpenMenu} />
 
       <main>
-        <section id="home" ref={containerRef} className="relative z-10 w-full h-screen bg-black text-white">
-          <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover z-0" />
-
-          <div
-            className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-6 md:px-24 z-20 pointer-events-none"
-            style={{
-              opacity: `var(--name-opacity, calc(1 - (var(--scroll-progress, 0) * 8)))`,
-              marginTop: window.innerWidth < 768 ? '160px' : '0px'
+        <section id="home" ref={containerRef} className="relative w-full h-screen bg-black">
+          <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover opacity-60" />
+          
+          <div 
+            className="absolute inset-0 flex flex-col justify-start md:justify-center items-center px-6 z-20 pointer-events-none pt-24 md:pt-0"
+            style={{ 
+              opacity: `calc(1 - (var(--scroll-progress, 0) * 6))`,
+              transform: `translateY(calc(var(--scroll-progress, 0) * -150px))`
             }}
           >
-            <div className="text-center md:text-left md:mt-28">
-              <p className="text-[10px] md:text-[18px] text-white/30 font-light mb-2 md:mb-8 tracking-[0.6em] md:tracking-[0.8em] uppercase">
-                FULL STACK DEVELOPER
-              </p>
-              <h1 className="text-[32px] sm:text-[40px] md:text-[110px] leading-[1.1] md:leading-[0.9] font-black text-white uppercase tracking-tighter mix-blend-difference">
-                Mohammed <br className="hidden md:block" /> <span className="text-white">Shanis</span>
+            <div className="text-center mt-64">
+              <p className="text-[10px] md:text-[12px] text-white/40 font-medium mb-4 tracking-[1em] uppercase">Full Stack Developer</p>
+              <h1 className="text-[40px] md:text-[140px] leading-[0.85] font-black text-white uppercase tracking-tighter">
+                MOHAMMED <br /> <span className="text-white/20 outline-text">SHANIS</span>
               </h1>
             </div>
           </div>
 
-          <style dangerouslySetInnerHTML={{
-            __html: `
-            @media (min-width: 768px) {
-              :root { --name-opacity: 1 !important; }
-            }
-          `}} />
-
           {SCENES.map((scene, index) => (
             <SceneOverlay key={index} scene={scene} />
           ))}
-
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center opacity-40">
-            <div className="w-[1px] h-8 md:h-12 bg-white/20" />
-          </div>
         </section>
 
-        <div className="relative z-40 -mt-120">
+        <div className="relative z-40 bg-[#050505]">
           <Project />
-        </div>
-
-        <div className="relative z-30">
           <AboutMe />
           <TestimonialSection />
           <FAQSection />
@@ -272,25 +185,65 @@ const HeroPage = () => {
           <Footer />
         </div>
       </main>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .outline-text { -webkit-text-stroke: 1px rgba(255,255,255,0.3); color: transparent; }
+        :root { --scroll-progress: 0; }
+      `}} />
     </div>
   );
 };
 
 const SceneOverlay = ({ scene }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const checkSize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+
+  const progress = `var(--scroll-progress, 0)`;
+  const localProgress = `clamp(0, (${progress} - ${scene.start}) / (${scene.end} - ${scene.start}), 1)`;
+  
+  // LOGIC: On mobile, fade out. On Desktop, Stay visible (clamp to 1 after fade-in)
+  const opacity = isMobile 
+    ? `calc(clamp(0, ${localProgress} * 10, 1) * clamp(0, (1 - ${localProgress}) * 10, 1))`
+    : `clamp(0, ${localProgress} * 10, 1)`;
+
+  const getDesktopClasses = () => {
+    if (scene.position === "bottom-left") return "items-end justify-start text-left pb-24 lg:pb-32";
+    if (scene.position === "top-right") return "items-start justify-end text-right pt-24 lg:pt-32";
+    return "items-center justify-center";
+  };
+
   return (
     <div
-      className="absolute inset-0 flex flex-col justify-center items-center md:items-end px-6 md:px-32 text-center md:text-right z-30 pointer-events-none"
-      style={{
-        opacity: `calc(clamp(0, (var(--scroll-progress, 0) - ${scene.start - 0.05}) * 20, 1) * clamp(0, (${scene.end + 0.05} - var(--scroll-progress, 0)) * 20, 1))`,
-        transform: `translateY(calc(20px - (clamp(0, (var(--scroll-progress, 0) - ${scene.start}) * 10, 1) * 20px)))`,
-        marginTop: window.innerWidth < 768 ? '160px' : '0px'
-      }}
+      className={`absolute inset-0 flex px-6 md:px-20 lg:px-32 z-30 pointer-events-none 
+      ${isMobile ? "items-center justify-center pt-32 mt-32" : getDesktopClasses()}`}
+      style={{ opacity }}
     >
-      <div className="max-w-[90%] md:max-w-xl md:-mt-56">
-        <h2 className="text-2xl sm:text-3xl md:text-7xl font-black mb-2 md:mb-4 text-white tracking-tighter uppercase leading-none italic">
+      <div className={`max-w-xl ${isMobile ? "text-center" : ""}`}>
+        <p className="text-[10px] md:text-[11px] text-blue-400 font-bold tracking-[0.5em] mb-3 uppercase">
+          {scene.subtitle}
+        </p>
+        <h2
+          className="text-xl md:text-[40px] lg:text-[48px] font-black uppercase leading-none mb-4 text-white"
+          style={{
+            letterSpacing: `calc(0.2em - (${localProgress} * 0.2em))`,
+            transform: `translateY(calc(20px - (${localProgress} * 20px)))`,
+          }}
+        >
           {scene.title}
         </h2>
-        <p className="text-[12px] sm:text-sm md:text-xl text-white/40 font-light leading-relaxed tracking-wide">
+        
+        {/* Alignment controlled divider */}
+        <div className={`h-[1px] w-24 bg-blue-500/50 mb-6 ${
+          isMobile || scene.position === "top-right" ? "ml-auto" : "mr-auto"
+        } ${isMobile ? "mx-auto" : ""}`} />
+
+        <p className={`text-xs md:text-sm text-white/60 leading-relaxed max-w-xs md:max-w-sm 
+          ${scene.position === "top-right" && !isMobile ? "ml-auto" : ""}`}>
           {scene.description}
         </p>
       </div>

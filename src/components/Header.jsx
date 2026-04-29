@@ -4,16 +4,19 @@ import {
   FiUser, FiMessageSquare, FiStar, FiHelpCircle
 } from "react-icons/fi";
 import logo from "../assets/projects/ms-removebg-preview.png";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Header = ({ activeSection, onNavClick, openMenu, setOpenMenu }) => {
+const Header = ({ openMenu, setOpenMenu }) => {
+   const navigate = useNavigate();
+  const location = useLocation();
   const navItems = [
-    { label: "Home", id: "home", icon: <FiHome size={22} /> },
-    { label: "Work", id: "projects", icon: <FiBriefcase size={22} /> },
-    { label: "About", id: "about", icon: <FiUser size={22} /> },
-    { label: "Reviews", id: "testimonials", icon: <FiStar size={22} /> },
-    { label: "FAQ", id: "faq", icon: <FiHelpCircle size={22} /> },
-    { label: "Contact", id: "contact", icon: <FiMessageSquare size={22} /> },
-  ];
+  { label: "Home", path: "/" },
+  { label: "Work", path: "/projects" },
+  { label: "About", path: "/about" },
+  { label: "Reviews", path: "/testimonials" },
+  { label: "Contact", path: "/contact" },
+  { label: "Blog", path: "/blog" },
+];
 
   return (
     <>
@@ -49,17 +52,17 @@ const Header = ({ activeSection, onNavClick, openMenu, setOpenMenu }) => {
           <nav className="px-4 space-y-1">
             {navItems.map((item) => (
               <button
-                key={item.id}
+                key={item.path}
                 onClick={() => {
-                  onNavClick(item.id);
+                  navigate(item.path);
                   setOpenMenu(false);
                 }}
-                className={`w-full flex items-center gap-5 px-4 py-4 rounded-2xl transition-all duration-300 ${activeSection === item.id
+                className={`w-full flex items-center gap-5 px-4 py-4 rounded-2xl transition-all duration-300 ${location.pathname === item.path
                     ? "bg-white/10 text-white"
                     : "text-white/40 hover:text-white hover:bg-white/5"
                   }`}
               >
-                <span className={`${activeSection === item.id ? "text-white" : "text-white/30"}`}>
+                <span className={`${location.pathname === item.path ? "text-white" : "text-white/30"}`}>
                   {item.icon}
                 </span>
                 <span className="text-base font-medium tracking-wide translate-y-[1px]">
@@ -87,9 +90,12 @@ const Header = ({ activeSection, onNavClick, openMenu, setOpenMenu }) => {
           <nav className="hidden md:flex items-center gap-1 px-1">
             {navItems.map((item) => (
               <button
-                key={item.id}
-                onClick={() => onNavClick(item.id)}
-                className={`px-4 py-2 rounded-2xl text-[10px] font-bold tracking-[0.15em] transition-all duration-500 uppercase ${activeSection === item.id
+                key={item.path}
+               onClick={() => {
+  navigate(item.path);
+  setOpenMenu(false);
+}}
+                className={`px-4 py-2 rounded-2xl text-[10px] font-bold tracking-[0.15em] transition-all duration-500 uppercase ${location.pathname === item.path
                   ? "bg-white/15 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]"
                   : "text-[#888888] hover:text-white hover:bg-white/5"
                   }`}
