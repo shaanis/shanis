@@ -159,21 +159,29 @@ const HeroPage = () => {
         <section id="home" ref={containerRef} className="relative w-full h-screen bg-black">
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover opacity-60" />
           
-          <div 
-            className="absolute inset-0 flex flex-col justify-start md:justify-center items-center px-6 z-20 pointer-events-none pt-24 md:pt-0"
-            style={{ 
-              opacity: `calc(1 - (var(--scroll-progress, 0) * 6))`,
-              transform: `translateY(calc(var(--scroll-progress, 0) * -150px))`
-            }}
-          >
-            <div className="text-center mt-64">
-              <p className="text-[8px] md:text-[10px] text-white/40 font-medium mb-4 tracking-[1em] uppercase">Full Stack Developer</p>
-              <h1 className="text-[45px] md:text-[110px] leading-[0.85] font-black text-white uppercase tracking-tighter">
-  <span className="block">Mohammed</span>
-  <span className="text-white/20 outline-text">Shanis</span>
-</h1>
-            </div>
-          </div>
+          <div
+  className="
+    absolute inset-0 z-20 pointer-events-none px-6
+    flex flex-col items-center justify-center
+    pt-32 mt-32
+    md:pt-0 md:mt-0
+  "
+  style={{
+    opacity: `calc(1 - (var(--scroll-progress, 0) * 6))`,
+    transform: `translateY(calc(var(--scroll-progress, 0) * -150px))`,
+  }}
+>
+  <div className="text-center md:mt-32">
+    <p className="text-[8px] md:text-[10px] text-white/40 font-medium mb-4 tracking-[1em] uppercase">
+      Full Stack Developer
+    </p>
+
+    <h1 className="text-[45px] md:text-[110px] leading-[0.85] font-black text-white uppercase tracking-tighter">
+      <span className="block">Mohammed</span>
+      <span className="text-white/20 outline-text">Shanis</span>
+    </h1>
+  </div>
+</div>
 
           {SCENES.map((scene, index) => (
             <SceneOverlay key={index} scene={scene} />
