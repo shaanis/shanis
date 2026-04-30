@@ -83,7 +83,7 @@ const ProjectPage = () => {
         <meta name="description" content="A gallery of premium digital solutions and full-stack applications." />
       </Helmet>
 
-      <Header />
+     
 
       {/* LARGE STICKY BACKGROUND TEXT */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden select-none z-0">

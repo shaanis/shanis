@@ -9,6 +9,7 @@ import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetail from "./pages/BlogDetail";
+import ServicePage from "./pages/ServicePage";
 
 // Component to reset scroll position on route change
 function ScrollToTop() {
@@ -38,6 +39,9 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/services" element={<ServicePage />} />
+
+        
       </Routes>
     </>
   );

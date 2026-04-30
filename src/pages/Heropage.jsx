@@ -8,6 +8,8 @@ import FAQSection from "../components/FAQSection";
 import Footer from "../components/Footer";
 import TestimonialSection from "../components/TestimonialSection";
 import Header from "../components/Header";
+import SEO from "../seo/SEO";
+import { seoData } from "../seo/seoConfig";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,15 +19,15 @@ const FRAME_SKIP = 4;
 const SCENES = [
   {
     start: 0.20,
-    end: 0.35, 
+    end: 0.45, 
     position: "bottom-left", 
     title: "Full Stack Engineering",
     subtitle: "01 / ARCHITECTURE",
     description: "Delivering end-to-end web solutions with modern frontend frameworks and scalable backend systems.",
   },
   {
-    start: 0.45, // Starts shortly after scene 1
-    end: 0.60,   
+    start: 0.55, // Starts shortly after scene 1
+    end: 0.75,   
     position: "top-right", 
     title: "Performance & Scalability",
     subtitle: "02 / OPTIMIZATION",
@@ -140,6 +142,7 @@ const HeroPage = () => {
   };
 
   return (
+    
     <div className="relative bg-[#050505] overflow-x-hidden">
       {loadProgress < 100 && (
         <div className="fixed inset-0 z-[500] bg-black flex flex-col items-center justify-center">
@@ -150,8 +153,8 @@ const HeroPage = () => {
         </div>
       )}
 
-      <Header activeSection={activeSection} onNavClick={handleNavClick} openMenu={openMenu} setOpenMenu={setOpenMenu} />
-
+      {/* <Header activeSection={activeSection} onNavClick={handleNavClick} openMenu={openMenu} setOpenMenu={setOpenMenu} /> */}
+ <SEO {...seoData.home} />
       <main>
         <section id="home" ref={containerRef} className="relative w-full h-screen bg-black">
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover opacity-60" />
@@ -164,10 +167,11 @@ const HeroPage = () => {
             }}
           >
             <div className="text-center mt-64">
-              <p className="text-[10px] md:text-[12px] text-white/40 font-medium mb-4 tracking-[1em] uppercase">Full Stack Developer</p>
-              <h1 className="text-[40px] md:text-[140px] leading-[0.85] font-black text-white uppercase tracking-tighter">
-                MOHAMMED <br /> <span className="text-white/20 outline-text">SHANIS</span>
-              </h1>
+              <p className="text-[8px] md:text-[10px] text-white/40 font-medium mb-4 tracking-[1em] uppercase">Full Stack Developer</p>
+              <h1 className="text-[45px] md:text-[110px] leading-[0.85] font-black text-white uppercase tracking-tighter">
+  <span className="block">Mohammed</span>
+  <span className="text-white/20 outline-text">Shanis</span>
+</h1>
             </div>
           </div>
 

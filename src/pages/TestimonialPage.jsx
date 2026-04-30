@@ -41,7 +41,7 @@ const TestimonialPage = () => {
         <meta name="description" content="Verified feedback from industry leaders on full-stack development and UI engineering." />
       </Helmet>
 
-      <Header />
+    
 
       <main className="flex flex-col md:flex-row h-full pt-32 md:pt-0">
         
