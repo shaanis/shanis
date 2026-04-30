@@ -12,7 +12,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
   const navItems = [
   { label: "Home", path: "/" },
   { label: "Work", path: "/projects" },
-  { label: "About", path: "/about" },
+  { label: "Services", path: "/services" },
   { label: "Reviews", path: "/testimonials" },
   { label: "Contact", path: "/contact" },
   { label: "Blog", path: "/blog" },
