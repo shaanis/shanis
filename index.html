@@ -3,11 +3,17 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- font -->
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
-  <!-- bing -->
-   <meta name="msvalidate.01" content="94AB49BCAD4F1F0BD8DC209214C4D586" />
+
+  <!-- 🔥 Performance (Preconnect for fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+
+  <!-- Bing Verification -->
+  <meta name="msvalidate.01" content="94AB49BCAD4F1F0BD8DC209214C4D586" />
 
   <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,13 +21,13 @@
   <!-- Title -->
   <title>Mohammed Shanis – Full Stack Developer | MERN & Flutter</title>
 
-  <!-- Canonical Tag -->
+  <!-- Canonical -->
   <link rel="canonical" href="https://shanis.in" />
 
   <!-- Robots -->
   <meta name="robots" content="index, follow" />
 
-  <!-- Theme Color -->
+  <!-- Theme -->
   <meta name="theme-color" content="#000000" />
 
   <!-- Manifest -->
@@ -29,8 +35,9 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/svg+xml" href="/m1.png" />
 
-  <!-- Primary SEO Meta Tags -->
+  <!-- SEO Meta -->
   <meta name="description"
     content="Mohammed Shanis – Full Stack Developer specializing in MERN, React, Node.js & Flutter. Explore my portfolio, professional projects, and high-quality web apps." />
 
@@ -39,7 +46,7 @@
 
   <meta name="author" content="Mohammed Shanis" />
 
-  <!-- Open Graph / Facebook / LinkedIn -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Mohammed Shanis – Full Stack Developer" />
   <meta property="og:description"
     content="Explore my professional portfolio featuring MERN stack projects, Flutter apps, real-time chat apps, and modern UI/UX work." />
@@ -47,47 +54,61 @@
   <meta property="og:url" content="https://shanis.in" />
   <meta property="og:type" content="website" />
 
-  <!-- Twitter Card -->
+  <!-- Twitter (FIXED IMAGE) -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mohammed Shanis – Full Stack Developer" />
   <meta name="twitter:description"
     content="MERN, React, Node.js, Flutter developer portfolio with clean UI/UX and high-quality projects." />
-  <meta name="twitter:image" content="https://shanis.in" />
+  <meta name="twitter:image" content="https://shanis.in/preview.jpg" />
 
-  <!-- Schema Markup (JSON-LD) -->
+  <!-- Schema -->
   <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Mohammed Shanis",
-        "url": "https://shanis.in",
-        "jobTitle": "Full Stack Developer",
-        "image": "https://shanis.in/profile.jpg",
-        "sameAs": [
-          "https://github.com/shaanis",
-          "https://www.linkedin.com/in/mohammed-shanis-p-14893032b/"
-        ],
-        "knowsAbout": [
-          "React",
-          "Node.js",
-          "Flutter",
-          "MongoDB",
-          "Express",
-          "Tailwind CSS",
-          "Full Stack Development",
-          "JavaScript",
-          "UI/UX"
-        ]
-      }
-    </script>
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mohammed Shanis",
+    "url": "https://shanis.in",
+    "jobTitle": "Full Stack Developer",
+    "image": "https://shanis.in/profile.jpg",
+    "sameAs": [
+      "https://github.com/shaanis",
+      "https://www.linkedin.com/in/mohammed-shanis-p-14893032b/"
+    ],
+    "knowsAbout": [
+      "React",
+      "Node.js",
+      "Flutter",
+      "MongoDB",
+      "Express",
+      "Tailwind CSS",
+      "Full Stack Development",
+      "JavaScript",
+      "UI/UX"
+    ]
+  }
+  </script>
 
-  <!-- Vite -->
-  <link rel="icon" type="image/svg+xml" href="/m1.png" />
 </head>
 
 <body>
+
+  <!-- ✅ SEO FIX: H1 for search engines -->
+  <h1 style="position:absolute; left:-9999px;">
+    Mohammed Shanis – Full Stack Developer | MERN & Flutter Portfolio
+  </h1>
+
+  <!-- React Root -->
   <div id="root"></div>
+
+  <!-- ✅ No-JS fallback (SEO boost) -->
+  <noscript>
+    <h1>Mohammed Shanis – Full Stack Developer</h1>
+    <p>Explore my MERN stack projects, Flutter apps, and portfolio.</p>
+  </noscript>
+
+  <!-- React Script -->
   <script type="module" src="/src/main.jsx"></script>
+
 </body>
 
 </html>
