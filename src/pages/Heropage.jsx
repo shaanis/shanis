@@ -65,7 +65,7 @@ const HeroPage = () => {
     const preloadImages = async () => {
       const keyFrames = [];
       for (let i = 1; i <= TOTAL_FRAMES; i += FRAME_SKIP) keyFrames.push(i);
-      const batchSize = 12;
+      const batchSize = 8;
       for (let i = 0; i < keyFrames.length; i += batchSize) {
         await Promise.all(keyFrames.slice(i, i + batchSize).map(loadImage));
       }
@@ -83,58 +83,110 @@ const HeroPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!isReady) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+  if (!isReady) return;
 
-    const render = (frameIndex) => {
-      const frame = Math.floor(frameIndex);
-      let img = imagesRef.current[frame] || imagesRef.current.find(i => i);
-      if (img && img.complete) {
-        const canvasRatio = canvas.width / canvas.height;
-        const imgRatio = img.width / img.height;
-        let dW, dH, x, y;
-        if (canvasRatio > imgRatio) {
-          dW = canvas.width; dH = canvas.width / imgRatio;
-          x = 0; y = (canvas.height - dH) / 2;
-        } else {
-          dW = canvas.height * imgRatio; dH = canvas.height;
-          x = (canvas.width - dW) / 2; y = 0;
-        }
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, x, y, dW, dH);
-      }
-    };
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d", { alpha: false });
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+  let animationFrameId = null;
+  let lastRenderedFrame = -1;
+  let firstImage = imagesRef.current.find(Boolean);
+
+  const render = (frameIndex) => {
+    const frame = Math.min(
+      TOTAL_FRAMES - 1,
+      Math.max(0, Math.floor(frameIndex))
+    );
+
+    // Same frame aanenkil redraw venda
+    if (frame === lastRenderedFrame) return;
+    lastRenderedFrame = frame;
+
+    const img = imagesRef.current[frame] || firstImage;
+    if (!img || !img.complete) return;
+
+    const canvasRatio = canvas.width / canvas.height;
+    const imgRatio = img.width / img.height;
+
+    let dW, dH, x, y;
+
+    if (canvasRatio > imgRatio) {
+      dW = canvas.width;
+      dH = canvas.width / imgRatio;
+      x = 0;
+      y = (canvas.height - dH) / 2;
+    } else {
+      dW = canvas.height * imgRatio;
+      dH = canvas.height;
+      x = (canvas.width - dW) / 2;
+      y = 0;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, x, y, dW, dH);
+  };
+
+  const requestRender = (frameIndex) => {
+    scrollData.current.frame = frameIndex;
+
+    if (animationFrameId) return;
+
+    animationFrameId = requestAnimationFrame(() => {
       render(scrollData.current.frame);
-    };
-
-    window.addEventListener("resize", resize);
-    resize();
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=400%",
-        scrub: 0.8,
-        pin: true,
-        onUpdate: (self) => {
-          scrollData.current.frame = (TOTAL_FRAMES - 1) * self.progress;
-          render(scrollData.current.frame);
-          document.documentElement.style.setProperty('--scroll-progress', self.progress);
-        }
-      }
+      animationFrameId = null;
     });
+  };
 
-    return () => {
-      window.removeEventListener("resize", resize);
-      tl.kill();
-    };
-  }, [isReady]);
+  const resize = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+
+    canvas.style.width = `${window.innerWidth}px`;
+    canvas.style.height = `${window.innerHeight}px`;
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    lastRenderedFrame = -1;
+    render(scrollData.current.frame);
+  };
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  const scrollTrigger = ScrollTrigger.create({
+    trigger: containerRef.current,
+    start: "top top",
+    end: "+=400%",
+    scrub: 0.45,
+    pin: true,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+    onUpdate: (self) => {
+      const progress = self.progress;
+      const frame = (TOTAL_FRAMES - 1) * progress;
+
+      requestRender(frame);
+
+      document.documentElement.style.setProperty(
+        "--scroll-progress",
+        progress.toFixed(4)
+      );
+    },
+  });
+
+  return () => {
+    window.removeEventListener("resize", resize);
+
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+
+    scrollTrigger.kill();
+  };
+}, [isReady]);
 
   const handleNavClick = (id) => {
     const el = document.getElementById(id);
@@ -156,6 +208,7 @@ const HeroPage = () => {
       {/* <Header activeSection={activeSection} onNavClick={handleNavClick} openMenu={openMenu} setOpenMenu={setOpenMenu} /> */}
  <SEO {...seoData.home} />
       <main>
+        
         <section id="home" ref={containerRef} className="relative w-full h-screen bg-black">
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover opacity-60" />
           
@@ -197,12 +250,30 @@ const HeroPage = () => {
           <Footer />
         </div>
       </main>
+      <style dangerouslySetInnerHTML={{ __html: `
+  .outline-text {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    color: transparent;
+  }
+
+  :root {
+    --scroll-progress: 0;
+  }
+
+  canvas {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+`}} />
 
       <style dangerouslySetInnerHTML={{ __html: `
         .outline-text { -webkit-text-stroke: 1px rgba(255,255,255,0.3); color: transparent; }
         :root { --scroll-progress: 0; }
       `}} />
     </div>
+
+    
   );
 };
 
