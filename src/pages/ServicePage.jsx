@@ -218,15 +218,7 @@ export default function ServicePage() {
         <section className="relative min-h-screen flex items-center px-6 py-20">
           <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
             <motion.div style={{ y: heroTextY, opacity: heroOpacity }}>
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/65 backdrop-blur-xl"
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.9)]" />
-                Premium digital service
-              </motion.div>
+              
 
               <motion.h1
                 initial={{ opacity: 0, y: 35 }}
