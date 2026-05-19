@@ -309,8 +309,7 @@ const DesktopPinnedShowcase = () => {
 
       <div className="absolute left-10 right-10 top-8 z-50 flex items-center justify-between text-[10px] font-black uppercase tracking-[0.32em] text-white/42">
         <span>Selected Works</span>
-        <span>Scroll Showcase</span>
-        <span>2026</span>
+       
       </div>
 
       {scenes.map((scene, index) => (
