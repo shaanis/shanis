@@ -187,7 +187,7 @@ const HeroPage = () => {
 
               <h1 className="text-5xl sm:text-[72px] md:text-[118px] leading-[0.85] font-black text-white uppercase tracking-tighter">
                 <span className="block">Mohammed</span>
-                <span className=" outline-text">Shanis</span>
+                <span className="block outline-text">Shanis</span>
               </h1>
             </div>
           </div>
