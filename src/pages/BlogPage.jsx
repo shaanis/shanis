@@ -93,7 +93,7 @@ const BlogPage = () => {
         />
         <meta property="og:type" content="website" />
 
-        <link rel="canonical" href="https://yourdomain.com/blog" />
+        <link rel="canonical" href="https://shanis.in/blog" />
       </Helmet>
 
       {/* ================= BACKGROUND ================= */}
