@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 /* ================= DATA ================= */
 const postsData = [
@@ -175,6 +176,7 @@ const BlogPage = () => {
                   }
                 `}
               >
+                <Link to={`/blog/${post.slug}`} className="absolute inset-0 z-20" aria-label={post.title} />
 
                 {/* IMAGE */}
                 <div className="relative h-full overflow-hidden">
