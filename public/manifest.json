@@ -1,22 +1,27 @@
 {
-    "name": "Mohammed Shanis Portfolio",
-    "short_name": "Shanis",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#0b0f13",
-    "theme_color": "#c8b57a",
-    "description": "Portfolio of Mohammed Shanis — Full Stack Developer (MERN, React, Node.js, Flutter).",
-    "icons": [
-      {
-        "src": "/favicon.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "/favicon.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ]
-  }
-  
+  "name": "Mohammed Shanis Portfolio",
+  "short_name": "Shanis",
+  "description": "Portfolio of Mohammed Shanis — Full Stack Developer specializing in MERN Stack, React, Node.js, MongoDB, Flutter, UI/UX, and modern web development.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050505",
+  "theme_color": "#f97316",
+  "categories": ["portfolio", "developer", "technology", "web development"],
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
