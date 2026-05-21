@@ -3,13 +3,12 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import AboutMe from "../components/AboutMe";
 import profile from "../assets/projects/mockups/profile.jpeg";
+import SEO from "../seo/SEO";
 
 const AboutPage = () => {
   return (
     <div className="bg-[#030303] text-white min-h-screen selection:bg-white selection:text-black overflow-hidden">
-      <Helmet>
-        <title>About | Mohammed Shanis</title>
-      </Helmet>
+     <SEO {...seoData.about} />
 
       {/* ================= HERO ================= */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden px-6">

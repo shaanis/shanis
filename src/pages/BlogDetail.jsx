@@ -215,62 +215,116 @@ const BlogDetail = () => {
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#050505] text-white selection:bg-orange-400 selection:text-black">
-      <Helmet>
-        <title>{post.title} | Mohammed Shanis Blog</title>
+     <Helmet>
+  <title>{post.title} | Mohammed Shanis Blog</title>
 
-        <meta name="description" content={metaDescription} />
-        <meta name="author" content={post.author || "Mohammed Shanis"} />
-        <meta
-          name="keywords"
-          content={`${post.title}, Mohammed Shanis blog, MERN stack, React developer, Node.js, web development, full stack developer Kerala`}
-        />
+  <meta name="description" content={metaDescription} />
+  <meta name="author" content={post.author || "Mohammed Shanis"} />
+  <meta
+    name="keywords"
+    content={`${post.title}, ${post.category}, Mohammed Shanis blog, MERN stack, React developer, Node.js developer, web development, full stack developer Kerala`}
+  />
 
-        <link rel="canonical" href={canonicalUrl} />
+  <link rel="canonical" href={canonicalUrl} />
 
-        <meta property="og:site_name" content="Mohammed Shanis Portfolio" />
-        <meta property="og:title" content={`${post.title} | Mohammed Shanis Blog`} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:image" content={post.image} />
-        <meta property="og:image:alt" content={post.title} />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:type" content="article" />
-        <meta property="og:locale" content="en_IN" />
+  {/* Open Graph */}
+  <meta property="og:site_name" content="Mohammed Shanis Portfolio" />
+  <meta property="og:title" content={`${post.title} | Mohammed Shanis Blog`} />
+  <meta property="og:description" content={metaDescription} />
+  <meta property="og:image" content={post.image} />
+  <meta property="og:image:alt" content={post.title} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="en_IN" />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${post.title} | Mohammed Shanis Blog`} />
-        <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:image" content={post.image} />
-        <meta name="twitter:image:alt" content={post.title} />
+  {/* Article OG */}
+  <meta property="article:author" content={post.author || "Mohammed Shanis"} />
+  <meta property="article:section" content={post.category} />
+  <meta property="article:published_time" content="2026-05-21T00:00:00+05:30" />
+  <meta property="article:modified_time" content="2026-05-21T00:00:00+05:30" />
 
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "@id": `${canonicalUrl}#blogposting`,
-            headline: post.title,
-            description: metaDescription,
-            image: post.image,
-            author: {
-              "@type": "Person",
-              name: post.author || "Mohammed Shanis",
-              url: SITE_URL,
-            },
-            publisher: {
-              "@type": "Person",
-              name: "Mohammed Shanis",
-              url: SITE_URL,
-            },
-            mainEntityOfPage: {
-              "@type": "WebPage",
-              "@id": canonicalUrl,
-            },
-            url: canonicalUrl,
-            articleSection: post.category,
-            datePublished: "2026-05-21",
-            dateModified: "2026-05-21",
-          })}
-        </script>
-      </Helmet>
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={`${post.title} | Mohammed Shanis Blog`} />
+  <meta name="twitter:description" content={metaDescription} />
+  <meta name="twitter:image" content={post.image} />
+  <meta name="twitter:image:alt" content={post.title} />
+
+  {/* BlogPosting Schema */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": `${canonicalUrl}#blogposting`,
+      headline: post.title,
+      name: post.title,
+      description: metaDescription,
+      image: [post.image],
+      url: canonicalUrl,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalUrl,
+      },
+      author: {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person`,
+        name: post.author || "Mohammed Shanis",
+        url: SITE_URL,
+      },
+      publisher: {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person`,
+        name: "Mohammed Shanis",
+        url: SITE_URL,
+      },
+      articleSection: post.category,
+      keywords: [
+        post.title,
+        post.category,
+        "MERN stack",
+        "React",
+        "Node.js",
+        "web development",
+        "full stack developer Kerala",
+      ],
+      wordCount: post.content
+        .map((block) => `${block.heading} ${block.text}`)
+        .join(" ")
+        .split(/\s+/).length,
+      inLanguage: "en-IN",
+      datePublished: "2026-05-21T00:00:00+05:30",
+      dateModified: "2026-05-21T00:00:00+05:30",
+    })}
+  </script>
+
+  {/* Breadcrumb Schema */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: `${SITE_URL}/blog`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: post.title,
+          item: canonicalUrl,
+        },
+      ],
+    })}
+  </script>
+</Helmet>
 
       {/* Premium Background */}
       <div className="fixed inset-0 pointer-events-none">

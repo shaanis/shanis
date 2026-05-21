@@ -62,17 +62,7 @@ const TestimonialSection = () => {
       className="w-full py-16 bg-black text-white relative"
       aria-label="Client Testimonials"
     >
-      {/* SEO Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org/",
-          "@type": "Review",
-          itemReviewed: {
-            "@type": "Person",
-            name: "Mohammed Shanis",
-          },
-        })}
-      </script>
+     
 
       <div className="max-w-3xl mx-auto px-4">
 

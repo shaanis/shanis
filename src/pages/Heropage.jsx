@@ -276,7 +276,6 @@ const SceneOverlay = ({ scene }) => {
   const progress = `var(--scroll-progress, 0)`;
   const localProgress = `clamp(0, (${progress} - ${scene.start}) / (${scene.end} - ${scene.start}), 1)`;
 
-  // മൊബൈലിൽ ഒരു സീൻ കഴിഞ്ഞ് അടുത്ത സീൻ വരുന്നതിന് മുൻപ് കൃത്യമായി അത് fade-out ആകാനുള്ള ഫിക്സ്
   const opacity = isMobile
     ? `calc(clamp(0, ${localProgress} * 6, 1) * clamp(0, (1 - ${localProgress}) * 6, 1))`
     : `clamp(0, ${localProgress} * 8, 1)`;

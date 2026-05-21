@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import Header from "../components/Header";
+import SEO from "../seo/SEO";
 
 const testimonials = [
   {
@@ -36,11 +37,7 @@ const TestimonialPage = () => {
        MD+: h-screen overflow-hidden (locks the viewport for the split effect)
     */
     <div className="bg-[#050505] text-white min-h-screen md:h-screen md:overflow-hidden font-sans selection:bg-white selection:text-black">
-      <Helmet>
-        <title>Testimonials | Engineering Reputation</title>
-        <meta name="description" content="Verified feedback from industry leaders on full-stack development and UI engineering." />
-      </Helmet>
-
+      <SEO {...seoData.testimonials} />
     
 
       <main className="flex flex-col md:flex-row h-full pt-32 md:pt-0">

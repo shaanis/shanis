@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import SEO from "../seo/SEO";
 
 /* ================= DATA ================= */
 const postsData = [
@@ -77,24 +78,7 @@ const BlogPage = () => {
     <div className="bg-[#080808] text-[#e5e5e5] min-h-screen font-sans selection:bg-white selection:text-black">
 
       {/* ================= SEO ================= */}
-      <Helmet>
-        <title>Blog | Full Stack Developer</title>
-
-        <meta
-          name="description"
-          content="Expert articles on MERN stack, UI/UX, backend scaling and modern web development."
-        />
-
-        {/* OpenGraph */}
-        <meta property="og:title" content="Developer Blog" />
-        <meta
-          property="og:description"
-          content="Deep dives into full stack engineering and UI design."
-        />
-        <meta property="og:type" content="website" />
-
-        <link rel="canonical" href="https://shanis.in/blog" />
-      </Helmet>
+      <SEO {...seoData.blog} />
 
       {/* ================= BACKGROUND ================= */}
       <div className="fixed inset-0 pointer-events-none">

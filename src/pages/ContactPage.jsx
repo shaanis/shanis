@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import SEO from "../seo/SEO";
 
 const ContactPage = () => {
 
@@ -35,6 +36,7 @@ const ContactPage = () => {
   };
   return (
     <div className="bg-black text-white min-h-screen font-sans">
+      <SEO {...seoData.contact} />
 
       {/* HERO - Oversized Typography Approach */}
       <section className="relative min-h-screen flex items-center px-6 md:px-12 overflow-hidden">

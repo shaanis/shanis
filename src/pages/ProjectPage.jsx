@@ -10,6 +10,7 @@ import sagara from "../assets/projects/mockups/bb.webp";
 import doorcarts from "../assets/projects/mockups/doorcarts.webp";
 import casaAura from "../assets/projects/mockups/mockupcasa.webp";
 import dva from "../assets/projects/mockups/dva3.webp";
+import SEO from "../seo/SEO";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -452,6 +453,7 @@ const DesktopPinnedShowcase = () => {
 const MobileTabletShowcase = () => {
   return (
     <section className="relative block overflow-hidden bg-[#050302] px-4 pb-20 pt-24 sm:px-6 lg:hidden">
+      <SEO {...seoData.projects} />
       {/* Same abstract background for mobile/tablet */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,104,62,0.18),transparent_32%),radial-gradient(circle_at_80%_80%,rgba(255,56,91,0.16),transparent_34%),linear-gradient(180deg,#080302,#020101)]" />
 

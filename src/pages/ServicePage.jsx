@@ -17,6 +17,7 @@ import {
   Mouse,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import SEO from "../seo/SEO";
 
 const services = [
   {
@@ -203,13 +204,7 @@ export default function ServicePage() {
 
   return (
     <>
-      <Helmet>
-        <title>Premium Services</title>
-        <meta
-          name="description"
-          content="Premium web development, UI/UX design, and SEO services."
-        />
-      </Helmet>
+      <SEO {...seoData.services} />
 
       <main className="min-h-screen overflow-hidden bg-[#050505] text-white">
         <ParallaxBackground />
