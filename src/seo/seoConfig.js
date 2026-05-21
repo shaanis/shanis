@@ -6,7 +6,7 @@ export const seoData = {
   home: {
     title: "Mohammed Shanis | Full Stack Developer Kerala",
     description:
-      "Mohammed Shanis is a full stack developer in Kerala specializing in MERN stack, React, Node.js, MongoDB, SEO-friendly websites, and modern web apps.",
+      "Mohammed Shanis is a full stack developer in Kerala building MERN stack, React, Node.js, MongoDB, and SEO-friendly modern websites.",
     url: baseUrl,
     image: defaultImage,
   },
