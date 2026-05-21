@@ -4,8 +4,7 @@ const defaultImage = `${baseUrl}/preview.jpg`;
 
 export const seoData = {
   home: {
-    title:
-      "Mohammed Shanis | Full Stack Developer in Kerala | MERN, React & Node.js Expert",
+    title: "Mohammed Shanis | Full Stack Developer Kerala",
     description:
       "Mohammed Shanis is a full stack developer in Kerala specializing in MERN stack, React, Node.js, MongoDB, SEO-friendly websites, and modern web apps.",
     url: baseUrl,
@@ -13,15 +12,15 @@ export const seoData = {
   },
 
   projects: {
-    title: "Projects | Mohammed Shanis | MERN, React & Flutter Developer",
+    title: "Projects | Mohammed Shanis",
     description:
-      "Explore web apps, MERN stack projects, React interfaces, Flutter applications, and full stack development work created by Mohammed Shanis.",
+      "Explore MERN stack, React, Node.js, Flutter, Firebase, and full stack web development projects created by Mohammed Shanis.",
     url: `${baseUrl}/projects`,
     image: defaultImage,
   },
 
   services: {
-    title: "Services | Web Development, MERN Stack & UI/UX | Mohammed Shanis",
+    title: "Services | Mohammed Shanis",
     description:
       "Hire Mohammed Shanis for website development, MERN stack apps, React frontend, Node.js backend, UI/UX design, and SEO-friendly web solutions.",
     url: `${baseUrl}/services`,
@@ -29,7 +28,7 @@ export const seoData = {
   },
 
   about: {
-    title: "About Mohammed Shanis | Full Stack Developer in Kerala",
+    title: "About | Mohammed Shanis",
     description:
       "Learn about Mohammed Shanis, a full stack developer from Kerala skilled in React, Node.js, MongoDB, Flutter, Firebase, Tailwind CSS, and GSAP.",
     url: `${baseUrl}/about`,
@@ -37,7 +36,7 @@ export const seoData = {
   },
 
   blog: {
-    title: "Blog | Mohammed Shanis | Web Development & MERN Stack Articles",
+    title: "Blog | Mohammed Shanis",
     description:
       "Read web development articles, MERN stack tutorials, React tips, UI/UX ideas, SEO insights, and developer guides by Mohammed Shanis.",
     url: `${baseUrl}/blog`,
@@ -45,7 +44,7 @@ export const seoData = {
   },
 
   contact: {
-    title: "Contact Mohammed Shanis | Freelance Full Stack Developer Kerala",
+    title: "Contact | Mohammed Shanis",
     description:
       "Contact Mohammed Shanis for freelance website development, MERN stack projects, React apps, Node.js backend systems, and modern web solutions.",
     url: `${baseUrl}/contact`,

@@ -3,6 +3,8 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
+const SITE_URL = "https://shanis.in";
+
 const postsData = [
   {
     id: 1,
@@ -10,6 +12,8 @@ const postsData = [
     category: "Development",
     date: "Aug 2025",
     desc: "Learn how to structure scalable backend systems using Node, Express, and MongoDB.",
+    seoDescription:
+      "Learn how to build scalable MERN applications with clean backend architecture, optimized React structure, reusable services, MongoDB indexing, and production-ready coding practices.",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
     slug: "scalable-mern-apps",
     readTime: "6 min read",
@@ -43,6 +47,8 @@ const postsData = [
     category: "Styling",
     date: "Sep 2025",
     desc: "Deep dive into the zero-runtime engine and the new CSS-first configuration.",
+    seoDescription:
+      "Explore Tailwind CSS styling workflows for building responsive, premium, and consistent user interfaces with utility classes, design tokens, modern CSS, and fast frontend development.",
     image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159",
     slug: "tailwind-v4",
     readTime: "5 min read",
@@ -68,6 +74,8 @@ const postsData = [
     category: "Backend",
     date: "Oct 2025",
     desc: "Strategies for worker threads, clustering, and caching.",
+    seoDescription:
+      "Discover practical Node.js performance techniques for high-traffic applications, including API optimization, caching, background jobs, worker threads, and scalable backend structure.",
     image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd",
     slug: "node-performance",
     readTime: "7 min read",
@@ -93,6 +101,8 @@ const postsData = [
     category: "Styling",
     date: "Nov 2025",
     desc: "Customizing Bootstrap to build premium UI.",
+    seoDescription:
+      "Learn how to create modern React interfaces with Bootstrap 5 by customizing layouts, forms, cards, spacing, typography, responsive components, and premium UI patterns.",
     image: "https://images.unsplash.com/photo-1550439062-609e1531270e",
     slug: "bootstrap-react-ui",
     readTime: "4 min read",
@@ -118,6 +128,8 @@ const postsData = [
     category: "Development",
     date: "Dec 2025",
     desc: "Moving beyond CSR with server-driven UI.",
+    seoDescription:
+      "Understand React Server Components, how they reduce client-side JavaScript, improve loading speed, support SEO-friendly pages, and help build better modern React apps.",
     image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
     slug: "react-server-components",
     readTime: "8 min read",
@@ -143,6 +155,8 @@ const postsData = [
     category: "UI/UX",
     date: "Jul 2025",
     desc: "Create cinematic animations using GSAP.",
+    seoDescription:
+      "Learn how to use GSAP and ScrollTrigger to create smooth cinematic web animations, pinned sections, reveal effects, premium landing pages, and scroll-based UI experiences.",
     image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
     slug: "gsap-animations",
     readTime: "6 min read",
@@ -192,6 +206,9 @@ const BlogDetail = () => {
     return <Navigate to="/blog" replace />;
   }
 
+  const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
+  const metaDescription = post.seoDescription || post.desc;
+
   const relatedPosts = postsData
     .filter((item) => item.slug !== post.slug)
     .slice(0, 3);
@@ -200,36 +217,59 @@ const BlogDetail = () => {
     <div className="min-h-screen overflow-hidden bg-[#050505] text-white selection:bg-orange-400 selection:text-black">
       <Helmet>
         <title>{post.title} | Mohammed Shanis Blog</title>
-        <meta name="description" content={post.desc} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.desc} />
-        <meta property="og:image" content={post.image} />
-        <meta property="og:type" content="article" />
-        <link rel="canonical" href={`https://shanis.in/blog/${post.slug}`} />
 
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.desc,
-      image: post.image,
-      author: {
-        "@type": "Person",
-        name: post.author || "Mohammed Shanis",
-      },
-      publisher: {
-        "@type": "Person",
-        name: "Mohammed Shanis",
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": `https://shanis.in/blog/${post.slug}`,
-      },
-      datePublished: "2026-05-21",
-      dateModified: "2026-05-21",
-    })}
-  </script>
+        <meta name="description" content={metaDescription} />
+        <meta name="author" content={post.author || "Mohammed Shanis"} />
+        <meta
+          name="keywords"
+          content={`${post.title}, Mohammed Shanis blog, MERN stack, React developer, Node.js, web development, full stack developer Kerala`}
+        />
+
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:site_name" content="Mohammed Shanis Portfolio" />
+        <meta property="og:title" content={`${post.title} | Mohammed Shanis Blog`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={post.image} />
+        <meta property="og:image:alt" content={post.title} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:locale" content="en_IN" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${post.title} | Mohammed Shanis Blog`} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={post.image} />
+        <meta name="twitter:image:alt" content={post.title} />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "@id": `${canonicalUrl}#blogposting`,
+            headline: post.title,
+            description: metaDescription,
+            image: post.image,
+            author: {
+              "@type": "Person",
+              name: post.author || "Mohammed Shanis",
+              url: SITE_URL,
+            },
+            publisher: {
+              "@type": "Person",
+              name: "Mohammed Shanis",
+              url: SITE_URL,
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": canonicalUrl,
+            },
+            url: canonicalUrl,
+            articleSection: post.category,
+            datePublished: "2026-05-21",
+            dateModified: "2026-05-21",
+          })}
+        </script>
       </Helmet>
 
       {/* Premium Background */}
@@ -297,7 +337,9 @@ const BlogDetail = () => {
                   MS
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{post.author}</p>
+                  <p className="text-sm font-semibold text-white">
+                    {post.author}
+                  </p>
                   <p className="text-xs text-white/35">Full Stack Developer</p>
                 </div>
               </div>
@@ -335,7 +377,8 @@ const BlogDetail = () => {
                       Article Summary
                     </p>
                     <p className="mt-3 text-sm leading-6 text-white/70">
-                      Practical insights for building better modern web applications.
+                      Practical insights for building better modern web
+                      applications.
                     </p>
                   </div>
                 </div>
@@ -432,7 +475,8 @@ const BlogDetail = () => {
                     </h3>
                     <p className="mt-5 max-w-2xl text-sm leading-7 text-white/50 md:text-base">
                       I build scalable, responsive, and animated web apps using
-                      React, Node.js, MongoDB, Tailwind CSS, GSAP, and modern UI systems.
+                      React, Node.js, MongoDB, Tailwind CSS, GSAP, and modern UI
+                      systems.
                     </p>
                   </div>
 
@@ -510,7 +554,9 @@ const BlogDetail = () => {
 
                     <div className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-orange-300">
                       Read article
-                      <span className="transition group-hover:translate-x-1">→</span>
+                      <span className="transition group-hover:translate-x-1">
+                        →
+                      </span>
                     </div>
                   </div>
                 </Link>
