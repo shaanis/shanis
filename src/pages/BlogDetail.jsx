@@ -205,7 +205,7 @@ const BlogDetail = () => {
         <meta property="og:description" content={post.desc} />
         <meta property="og:image" content={post.image} />
         <meta property="og:type" content="article" />
-        <link rel="canonical" href={`https://yourdomain.com/blog/${post.slug}`} />
+        <link rel="canonical" href={`https://shanis.in/blog/${post.slug}`} />
       </Helmet>
 
       {/* Premium Background */}
