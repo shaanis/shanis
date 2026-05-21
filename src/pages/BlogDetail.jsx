@@ -206,6 +206,30 @@ const BlogDetail = () => {
         <meta property="og:image" content={post.image} />
         <meta property="og:type" content="article" />
         <link rel="canonical" href={`https://shanis.in/blog/${post.slug}`} />
+
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.desc,
+      image: post.image,
+      author: {
+        "@type": "Person",
+        name: post.author || "Mohammed Shanis",
+      },
+      publisher: {
+        "@type": "Person",
+        name: "Mohammed Shanis",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": `https://shanis.in/blog/${post.slug}`,
+      },
+      datePublished: "2026-05-21",
+      dateModified: "2026-05-21",
+    })}
+  </script>
       </Helmet>
 
       {/* Premium Background */}
