@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import SEO from "../seo/SEO";
+import { seoData } from "../seo/seoConfig";
 
 const services = [
   {

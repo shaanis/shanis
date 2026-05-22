@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import SEO from "../seo/SEO";
-
+import { seoData } from "../seo/seoConfig";
 /* ================= DATA ================= */
 const postsData = [
   {

@@ -11,7 +11,7 @@ import doorcarts from "../assets/projects/mockups/doorcarts.webp";
 import casaAura from "../assets/projects/mockups/mockupcasa.webp";
 import dva from "../assets/projects/mockups/dva3.webp";
 import SEO from "../seo/SEO";
-
+import { seoData } from "../seo/seoConfig";
 gsap.registerPlugin(ScrollTrigger);
 
 const scenes = [

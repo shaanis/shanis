@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import AboutMe from "../components/AboutMe";
 import profile from "../assets/projects/mockups/profile.jpeg";
 import SEO from "../seo/SEO";
-
+import { seoData } from "../seo/seoConfig";
 const AboutPage = () => {
   return (
     <div className="bg-[#030303] text-white min-h-screen selection:bg-white selection:text-black overflow-hidden">

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import SEO from "../seo/SEO";
-
+import { seoData } from "../seo/seoConfig";
 const ContactPage = () => {
 
       const formRef = useRef();
