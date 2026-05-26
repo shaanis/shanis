@@ -7,6 +7,19 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
   color: white;
+   scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none; 
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;              /* Chrome/Safari/Edge */
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .outline-text {

@@ -1,8 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
-import Header from "../components/Header";
 import SEO from "../seo/SEO";
+import { seoData } from "../seo/seoConfig";
 
 const testimonials = [
   {
@@ -33,9 +32,7 @@ const testimonials = [
 
 const TestimonialPage = () => {
   return (
-    /* Mobile: min-h-screen (allows total page scroll)
-       MD+: h-screen overflow-hidden (locks the viewport for the split effect)
-    */
+   
     <div className="bg-[#050505] text-white min-h-screen md:h-screen md:overflow-hidden font-sans selection:bg-white selection:text-black">
       <SEO {...seoData.testimonials} />
     

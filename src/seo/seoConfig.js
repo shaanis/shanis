@@ -21,7 +21,7 @@ export const seoData = {
     type: "website",
   },
 
-  testimonials: {
+   testimonials: {
     title: "Testimonials | Mohammed Shanis",
     description:
       "Read client feedback and testimonials for Mohammed Shanis, a full stack developer in Kerala building modern websites and web applications.",

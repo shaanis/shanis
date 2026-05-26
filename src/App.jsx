@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import AetheraHero from "./pages/Heropage";
 import ProjectPage from "./pages/ProjectPage";
-import TestimonialPage from "./pages/TestimonialPage";
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetail from "./pages/BlogDetail";
 import ServicePage from "./pages/ServicePage";
+import TestimonialPage from "./pages/TestimonialPage";
 
 // Component to reset scroll position on route change
 function ScrollToTop() {
