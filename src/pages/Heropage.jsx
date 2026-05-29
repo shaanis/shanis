@@ -185,7 +185,7 @@ const HeroPage = () => {
                 Full Stack Developer
               </p>
 
-              <h1 className="text-[42px] sm:text-[72px] md:text-[118px] leading-[0.85] font-black text-white uppercase tracking-tighter">
+              <h1 className="text-[42px] sm:text-[72px] md:text-[118px] leading-[0.85] font-black text-white uppercase tracking-tighter ">
                 <span className="block">Mohammed</span>
                 <span className="block outline-text">Shanis</span>
               </h1>

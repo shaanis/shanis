@@ -11,7 +11,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
   const location = useLocation();
   const navItems = [
   { label: "Home", path: "/", icon: <FiHome /> },
-  { label: "Work", path: "/projects", icon: <FiBriefcase /> },
+  { label: "Projects", path: "/projects", icon: <FiBriefcase /> },
   { label: "Services", path: "/services", icon: <FiHelpCircle /> },
   { label: "Reviews", path: "/testimonials", icon: <FiStar /> },
   { label: "Contact", path: "/contact", icon: <FiMessageSquare /> },
