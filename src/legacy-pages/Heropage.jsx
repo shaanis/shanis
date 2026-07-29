@@ -43,12 +43,14 @@ const HeroPage = () => {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
 
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false,
-  );
+ const [mounted, setMounted] = useState(false);
+
+useEffect(() => {
+  setMounted(true);
+}, []);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setMounted(window.innerWidth < 768);
     handleResize();
 
     window.addEventListener("resize", handleResize);
@@ -169,7 +171,7 @@ const HeroPage = () => {
               md:inset-0 md:h-full
             "
             style={
-              isMobile
+              mounted
                 ? {}
                 : {
                     opacity: `clamp(0, calc(1 - (var(--scroll-progress, 0) * 4.5)), 1)`,
@@ -179,10 +181,10 @@ const HeroPage = () => {
             }
           >
             <div
-              className={
-                isMobile ? "text-center pt-4" : "text-center hero-title-reveal"
-              }
-            >
+  className={`text-center ${
+    mounted ? "hero-title-reveal md:pt-0 pt-4" : "pt-4"
+  }`}
+>
               <p className="text-[9px] sm:text-xs md:text-[11px] text-amber-400/90 font-medium mb-2 tracking-[0.42em] md:tracking-[0.8em] uppercase">
                 Full Stack Developer
               </p>
