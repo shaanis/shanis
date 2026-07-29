@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 import hero from "../assets/projects/2.webp";
@@ -9,6 +11,7 @@ import sagara from "../assets/projects/mockups/bb.webp";
 import doorcarts from "../assets/projects/mockups/doorcarts.webp";
 import casaAura from "../assets/projects/mockups/mockupcasa.webp";
 import dva from "../assets/projects/mockups/dva3.webp";
+import Image from "next/image";
 
 const projects = [
   {
@@ -63,9 +66,9 @@ const projects = [
 
 const Project = () => {
   const [isPaused, setIsPaused] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
   const openPage = () => {
-    navigate("/projects");
+    router.push("/projects");
   }
 
   return (
@@ -76,7 +79,7 @@ const Project = () => {
       >
         {/* ------------------ HERO SECTION ------------------ */}
         <div className="relative w-full h-[250px] sm:h-[380px] ">
-          <img
+          <Image
             loading="lazy"
             src={hero}
             alt="Mohammed Shanis Portfolio - Latest Full Stack and Flutter Projects"
@@ -113,7 +116,7 @@ const Project = () => {
               >
                 <div className="relative w-full h-[160px] sm:h-[200px] md:h-[220px] bg-gray-100 rounded-xl overflow-hidden group">
                   {/* Image */}
-                  <img
+                  <Image
                     loading="lazy"
                     src={item.image}
                     alt={item.title}
@@ -154,7 +157,7 @@ const Project = () => {
                 onMouseLeave={() => setIsPaused(false)}
               >
                 <div className="relative w-full h-[160px] sm:h-[200px] md:h-[220px] bg-gray-100 rounded-xl overflow-hidden group">
-                  <img
+                  <Image
                     loading="lazy"
                     src={item.image}
                     alt={item.title}

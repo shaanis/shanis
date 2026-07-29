@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 import { 
@@ -9,6 +11,7 @@ import {
   FiArrowUp
 } from "react-icons/fi";
 import logo from "../assets/projects/ms-removebg-preview.png";
+import Image from "next/image";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -36,7 +39,7 @@ const Footer = () => {
   viewport={{ once: true }}
   className="flex flex-col items-center md:items-start"
 >
-  <img
+  <Image
     src={logo} width={230}
     alt="logo"
    

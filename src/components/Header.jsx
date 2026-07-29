@@ -1,14 +1,17 @@
+"use client";
+
 import React from "react";
 import {
   FiMenu, FiX, FiArrowRight, FiHome, FiBriefcase,
   FiUser, FiMessageSquare, FiStar, FiHelpCircle
 } from "react-icons/fi";
 import logo from "../assets/projects/ms-removebg-preview.png";
-import { useNavigate, useLocation } from "react-router-dom";
+import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Header = ({ openMenu, setOpenMenu }) => {
-   const navigate = useNavigate();
-  const location = useLocation();
+   const router = useRouter();
+  const pathname = usePathname();
   const navItems = [
   { label: "Home", path: "/", icon: <FiHome /> },
   { label: "Projects", path: "/projects", icon: <FiBriefcase /> },
@@ -46,7 +49,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-2xl bg-white/8 border border-white/10 flex items-center justify-center">
-            <img src={logo} alt="logo" className="w-8 h-8 object-contain" />
+            <Image src={logo} alt="logo" className="w-8 h-8 object-contain" />
           </div>
 
           <div>
@@ -67,13 +70,13 @@ const Header = ({ openMenu, setOpenMenu }) => {
 
       <div className="grid grid-cols-2 gap-3">
         {navItems.map((item) => {
-          const active = location.pathname === item.path;
+          const active = pathname === item.path;
 
           return (
             <button
               key={item.path}
               onClick={() => {
-                navigate(item.path);
+                router.push(item.path);
                 setOpenMenu(false);
               }}
               className={`relative overflow-hidden rounded-3xl p-4 min-h-[92px]
@@ -133,7 +136,7 @@ const Header = ({ openMenu, setOpenMenu }) => {
 
           {/* LOGO */}
           <div className="pl-4 pr-2 hidden lg:flex items-center text-white/80">
-            <img src={logo} width={40} alt="logo" className="rounded-lg bg-white/5 p-1" />
+            <Image src={logo} width={40} alt="logo" className="rounded-lg bg-white/5 p-1" />
           </div>
 
           <div className="hidden lg:block w-[1px] h-6 bg-gradient-to-b from-transparent via-white/20 to-transparent mx-1"></div>
@@ -144,10 +147,10 @@ const Header = ({ openMenu, setOpenMenu }) => {
               <button
                 key={item.path}
                onClick={() => {
-  navigate(item.path);
+  router.push(item.path);
   setOpenMenu(false);
 }}
-                className={`px-4 py-2 rounded-2xl text-[10px] font-bold tracking-[0.15em] transition-all duration-500 uppercase ${location.pathname === item.path
+                className={`px-4 py-2 rounded-2xl text-[10px] font-bold tracking-[0.15em] transition-all duration-500 uppercase ${pathname === item.path
                   ? "bg-white/15 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]"
                   : "text-[#888888] hover:text-white hover:bg-white/5"
                   }`}
