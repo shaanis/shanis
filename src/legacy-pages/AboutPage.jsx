@@ -104,7 +104,7 @@ const AboutPage = () => {
           {/* STATS — Glassmorphism cards */}
           <div className="lg:col-span-5 grid grid-cols-2 gap-1 rounded-2xl overflow-hidden border border-white/10 backdrop-blur-sm bg-white/[0.02]">
             {[
-              { label: "Projects", value: "8+" },
+              { label: "Projects", value: "6+" },
               { label: "Experience", value: "1 Year" },
               { label: "Availability", value: "Open" },
               { label: "Status", value: "Available" },

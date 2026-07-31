@@ -18,7 +18,7 @@ const FAQSection = () => {
     {
       question: "What technologies do you specialize in?",
       answer:
-        "I specialize in the MERN stack (MongoDB, Express.js, React.js, Node.js) with over 1 year of production experience. I've delivered 8+ deployed projects using these technologies, focusing on optimized APIs, responsive interfaces, and well-structured database systems.",
+        "I specialize in the MERN stack (MongoDB, Express.js, React.js, Node.js) with over 1 year of production experience.  focusing on optimized APIs, responsive interfaces, and well-structured database systems.",
       icon: <FiCode className="text-xl" />,
       category: "Technical",
     },
@@ -303,7 +303,7 @@ const FAQSection = () => {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           <div className="text-center p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200">
-            <div className="text-3xl font-bold text-black">8+</div>
+            <div className="text-3xl font-bold text-black">6+</div>
             <div className="text-gray-600 mt-2"> Projects</div>
           </div>
           <div className="text-center p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200">
