@@ -4,7 +4,7 @@ import { posts } from "../lib/posts";
 export default function sitemap() {
   const staticPages = Object.values(pageSeo).map((page) => ({
     url: `${siteConfig.url}${page.path}`,
-    lastModified: new Date("2026-06-01"),
+    lastModified: new Date(),
     changeFrequency: page.path === "/" || page.path === "/blog" || page.path === "/projects" ? "weekly" : "monthly",
     priority: page.path === "/" ? 1 : page.path === "/projects" ? 0.95 : 0.85,
   }));
